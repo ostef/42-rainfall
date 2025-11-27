@@ -36,9 +36,9 @@ public:
 };
 
 int main(int argc, const char **argv, const char **envp) {
-    const size_t offset_a = offsetof(N, annotation) - 4;
-    const size_t offset_b = offsetof(N, number) - 4;
-    const size_t size = sizeof(N) - 4;
+    static_assert(offsetof(N, annotation) - 4 == 4);
+    static_assert(offsetof(N, number) - 4 == 104);
+    static_assert(sizeof(N) - 4 == 108);
 
     if (argc < 2) {
         _exit(1);
