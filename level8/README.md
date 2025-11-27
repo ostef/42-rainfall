@@ -8,4 +8,4 @@ Le programme est une boucle infinie qui prend dans stdin une commande {auth ;res
 ## La faille
 La faille reside dans le fait que lorsqu'on alloue de la memoire pour service, le buffer sera alloue juste apres auth (16 bytes apres).
 
-Il suffit donc d'ecrire dans la commande service 32-16 bytes pour atteindre le 32 eme byte de auth, ensuite on ecrit un dernier byte. De cette maniere, la condition dans la commande login sera vraie et /bin/sh sera execute.
+Il suffit donc d'appeler auth une premiere fois pour que la variable soit allouée, puis la command service avec 16 bytes pour atteindre le 32 eme byte de auth, ensuite on ecrit un dernier byte. De cette maniere, la condition dans la commande login sera vraie et /bin/sh sera execute.
