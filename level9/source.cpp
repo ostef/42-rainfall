@@ -13,8 +13,7 @@ public:
 class N : public BaseClass<N> {
 public:
     // void *vtable; // offset 0
-    char annotation[22]; // offset 4
-    char _padding[76];
+    char annotation[100]; // offset 4
     int number; // offset 104
     // total size 108
 
