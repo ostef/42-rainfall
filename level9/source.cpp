@@ -14,14 +14,13 @@ class N : public BaseClass<N> {
 public:
     // void *vtable; // offset 0
     char annotation[22]; // offset 4
-    short number1; // offset 26
-    char _padding[74];
-    int number2; // offset 104
+    char _padding[76];
+    int number; // offset 104
     // total size 108
 
 public:
     N(int value) {
-        this->number1 = value;
+        this->number = value;
     }
 
     void setAnnotation(const char *str) {
@@ -29,19 +28,18 @@ public:
     }
 
     virtual int operator+(N &other) override {
-        return (this->number1) + (other.number1);
+        return (this->number) + (other.number);
     }
 
     virtual int operator-(N &other) override {
-        return (this->number1) - (other.number1);
+        return (this->number) - (other.number);
     }
 };
 
 int main(int argc, const char **argv, const char **envp) {
-    const size_t offset_a = offsetof(N, annotation);
-    const size_t offset_b = offsetof(N, number1);
-    const size_t offset_c = offsetof(N, number2);
-    const size_t size = sizeof(N);
+    const size_t offset_a = offsetof(N, annotation) - 4;
+    const size_t offset_b = offsetof(N, number) - 4;
+    const size_t size = sizeof(N) - 4;
 
     if (argc < 2) {
         _exit(1);
