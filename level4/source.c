@@ -14,7 +14,7 @@ void n() {
     fgets(s, 512, stdin);
     p(s);
 
-    if (m == 0x1025544) {
+    if (m == 0x01025544) {
         system("/bin/cat /home/user/level5/.pass");
     }
 }
