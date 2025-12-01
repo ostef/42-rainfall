@@ -25,8 +25,7 @@ strdup("lkjsadlksajflkjsalkjflkajfdslkfj"...)          = 0x0804a008
 +++ exited (status 8) +++
 ```
 
-on ne peut pas rediriger le shellcode dans le buffer, car il y a un check qui nous en empeche
-on va mettre l'adresse du strdup dans eip: 0x0804a008
+> 0x0804a008
 
 ## Le shellcode
 Voici le shellcode qu'on va utiliser, qui execute /bin/sh:
