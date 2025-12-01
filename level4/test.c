@@ -1,3 +1,5 @@
+// gcc -m32 test.c
+
 #include <stdio.h>
 
 int m;
