@@ -1,4 +1,4 @@
-## Fonctionnement du programme
+## Le programme
 Le programme ouvre le fichier leve8/.pass et lit 68 caracteres dans la variable globale c
 
 Le programme crash lorsqu'on l'analyse avec gdb ou ltrace avant de finir le fgets car fopen return NULL par securite, donc on ne pourra pas lire le flag grace a gdb.
@@ -21,7 +21,7 @@ On deduit que l'on doit exploiter les strcpy pour modifier l'entree dans la GOT 
  8048400:	ff 25 28 99 04 08    	jmp    *0x8049928
 ...
 ```
-Il nous faudra donc ecrire a l'adresse `0x8049928` l'adresse `0x080484f4`
+Il nous faudra donc ecrire a l'adresse `0x08049928` l'adresse `0x080484f4`
 ## Trouver l'adresse des strcpy
 ```
 > ltrace ./level7 a b
