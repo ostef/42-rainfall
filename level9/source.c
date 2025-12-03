@@ -15,7 +15,7 @@ static const BaseClass_VTable N_VTable = {
     N_operator_plus, N_operator_minus,
 };
 
-N *NewN(int number) {
+N *N_operator_new(int number) {
     N *result = (N *)malloc(sizeof(N));
     result->vtable = &N_VTable;
     result->number = number;
@@ -36,8 +36,8 @@ void N_setAnnotation(N *n, const char *str) {
 }
 
 int main(int argc, char **argv) {
-    N *a = NewN(5);
-    N *b = NewN(6);
+    N *a = N_operator_new(5);
+    N *b = N_operator_new(6);
 
     N_setAnnotation(a, argv[1]);
 
