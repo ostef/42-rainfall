@@ -37,7 +37,7 @@ int main() {
         }
 
         if (!memcmp(s, "login", 5)) {
-            if (*((uint32_t *)auth + 8)) {
+            if (((uint32_t *)auth)[8] != 0) {
                 system("/bin/sh");
             } else {
                 fwrite("Password:\n", 1, 10, stdout);
